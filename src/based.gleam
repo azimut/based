@@ -87,7 +87,9 @@ fn view(model: Model) {
         ]),
         html.main([class("flex flex-col md:flex-row justify-center h-4/5")], [
           label([class("flex grow flex-col items-center px-2")], [
-            h2([class("font-bold text-xl text-fuchsia-100 py-1")], [text("Encoded")]),
+            h2([class("font-bold text-xl text-fuchsia-100 py-1")], [
+              text("Encoded"),
+            ]),
             textarea(
               [
                 class(
@@ -104,7 +106,9 @@ fn view(model: Model) {
             ]),
           ]),
           label([class("flex grow flex-col items-center px-2")], [
-            h2([class("font-bold text-xl text-fuchsia-100 py-1")], [text("Decoded")]),
+            h2([class("font-bold text-xl text-fuchsia-100 py-1")], [
+              text("Decoded"),
+            ]),
             textarea(
               [
                 class(
@@ -122,7 +126,13 @@ fn view(model: Model) {
           ]),
         ]),
         footer([class("mx-auto my-0")], [
-          a([href("https://github.com/azimut/based"),class("underline-offset-1 underline")], [text("source")]),
+          a(
+            [
+              href("https://github.com/azimut/based"),
+              class("underline-offset-1 underline"),
+            ],
+            [text("source")],
+          ),
         ]),
       ],
     ),
