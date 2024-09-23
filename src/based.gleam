@@ -93,7 +93,7 @@ fn view(model: Model) {
             textarea(
               [
                 class(
-                  "text-stone-900 bg-stone-100 border w-full grow p-1 focus:placeholder-white resize-none",
+                  "text-stone-900 bg-stone-100 border w-full grow p-1 focus:placeholder-transparent resize-none",
                 ),
                 event.on_input(NewEncodedInput),
                 spellcheck(False),
@@ -112,7 +112,7 @@ fn view(model: Model) {
             textarea(
               [
                 class(
-                  "text-stone-900 bg-stone-100 border w-full grow p-1 focus:placeholder-white resize-none",
+                  "text-stone-900 bg-stone-100 border w-full grow p-1 focus:placeholder-transparent resize-none",
                 ),
                 event.on_input(NewDecodedInput),
                 spellcheck(False),
