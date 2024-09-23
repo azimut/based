@@ -1,8 +1,8 @@
 import gleam/bit_array
 import gleam/result
 import lustre
-import lustre/attribute.{placeholder}
-import lustre/element/html.{h2, label, text, textarea}
+import lustre/attribute.{type Attribute, placeholder}
+import lustre/element/html.{button, h1, h2, label, text, textarea}
 import lustre/event
 
 pub fn main() {
@@ -42,21 +42,31 @@ fn update(_model, msg) {
   }
 }
 
+fn spellcheck(toggle: Bool) -> Attribute(a) {
+  case toggle {
+    True -> attribute.attribute("spellcheck", "true")
+    False -> attribute.attribute("spellcheck", "false")
+  }
+}
+
 fn view(model: Model) {
   html.main([], [
+    h1([], [text("Base64")]),
     label([], [
       h2([], [text("Encoded")]),
       textarea(
-        [event.on_input(NewEncodedInput), placeholder("encoded text...")],
+        [event.on_input(NewEncodedInput), spellcheck(False), placeholder("aGVsbG8=")],
         model.encoded,
       ),
+      button([], [text("Copy")]),
     ]),
-    label([],[
+    label([], [
       h2([], [text("Decoded")]),
       textarea(
-      [event.on_input(NewDecodedInput), placeholder("decoded text...")],
-      model.decoded,
-    )
+        [event.on_input(NewDecodedInput), spellcheck(False), placeholder("plaintext")],
+        model.decoded,
+      ),
+      button([], [text("Copy")]),
     ]),
   ])
 }
