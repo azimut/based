@@ -2,9 +2,11 @@ import gleam/bit_array
 import gleam/int
 import gleam/result
 import lustre
-import lustre/attribute.{type Attribute, class, placeholder}
+import lustre/attribute.{type Attribute, class, href, placeholder}
 import lustre/effect.{type Effect}
-import lustre/element/html.{button, div, h1, h2, header, label, text, textarea}
+import lustre/element/html.{
+  a, button, div, footer, h1, h2, header, label, span, text, textarea,
+}
 import lustre/event
 
 pub fn main() {
@@ -69,37 +71,60 @@ fn spellcheck(toggle: Bool) -> Attribute(a) {
 }
 
 fn view(model: Model) {
-  div([class("max-w-screen-lg my-0 mx-auto h-screen")], [
-    header([class("flex flex-row justify-center")], [
-      h1([class("text-4xl py-3 font-extrabold")], [text("Base64")]),
-    ]),
-    html.main([class("flex flex-col md:flex-row justify-center h-4/5")], [
-      label([class("flex grow flex-col items-center px-2")], [
-        h2([class("font-bold")], [text("Encoded")]),
-        textarea(
-          [
-            class("border w-full grow p-1 focus:placeholder-white resize-none"),
-            event.on_input(NewEncodedInput),
-            spellcheck(False),
-            placeholder("aGVsbG8="),
-          ],
-          model.encoded,
+  div([class("bg-stone-900 text-fuchsia-100")], [
+    div(
+      [
+        class(
+          "max-w-screen-lg flex flex-col justify-evenly my-0 mx-auto h-screen",
         ),
-        button([event.on_click(SaveEncodedInput), tabindex(-1)], [text("Copy")]),
-      ]),
-      label([class("flex grow flex-col items-center px-2")], [
-        h2([class("font-bold")], [text("Decoded")]),
-        textarea(
-          [
-            class("border w-full grow p-1 focus:placeholder-white resize-none"),
-            event.on_input(NewDecodedInput),
-            spellcheck(False),
-            placeholder("plaintext"),
-          ],
-          model.decoded,
-        ),
-        button([event.on_click(SaveDecodedInput), tabindex(-1)], [text("Copy")]),
-      ]),
-    ]),
+      ],
+      [
+        header([class("flex flex-row justify-center")], [
+          h1([class("text-6xl py-3 font-extrabold")], [
+            text("Base"),
+            span([class("text-fuchsia-300")], [text("64")]),
+          ]),
+        ]),
+        html.main([class("flex flex-col md:flex-row justify-center h-4/5")], [
+          label([class("flex grow flex-col items-center px-2")], [
+            h2([class("font-bold text-xl text-fuchsia-100 py-1")], [text("Encoded")]),
+            textarea(
+              [
+                class(
+                  "text-stone-900 bg-stone-100 border w-full grow p-1 focus:placeholder-white resize-none",
+                ),
+                event.on_input(NewEncodedInput),
+                spellcheck(False),
+                placeholder("aGVsbG8="),
+              ],
+              model.encoded,
+            ),
+            button([event.on_click(SaveEncodedInput), tabindex(-1)], [
+              text("Copy"),
+            ]),
+          ]),
+          label([class("flex grow flex-col items-center px-2")], [
+            h2([class("font-bold text-xl text-fuchsia-100 py-1")], [text("Decoded")]),
+            textarea(
+              [
+                class(
+                  "text-stone-900 bg-stone-100 border w-full grow p-1 focus:placeholder-white resize-none",
+                ),
+                event.on_input(NewDecodedInput),
+                spellcheck(False),
+                placeholder("plaintext"),
+              ],
+              model.decoded,
+            ),
+            button([event.on_click(SaveDecodedInput), tabindex(-1)], [
+              text("Copy"),
+            ]),
+          ]),
+        ]),
+        footer([class("mx-auto my-0")], [
+          a([href("https://github.com/azimut/based"),class("underline-offset-1 underline")], [text("source")]),
+        ]),
+      ],
+    ),
   ])
 }
