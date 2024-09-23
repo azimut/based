@@ -1,9 +1,10 @@
 import gleam/bit_array
+import gleam/int
 import gleam/result
 import lustre
-import lustre/attribute.{type Attribute, placeholder}
+import lustre/attribute.{type Attribute, class, placeholder}
 import lustre/effect.{type Effect}
-import lustre/element/html.{button, h1, h2, label, text, textarea}
+import lustre/element/html.{button, div, h1, h2, header, label, text, textarea}
 import lustre/event
 
 pub fn main() {
@@ -56,6 +57,10 @@ fn update(model: Model, msg: Msg) {
   }
 }
 
+fn tabindex(idx: Int) -> Attribute(a) {
+  attribute.attribute("tabindex", int.to_string(idx))
+}
+
 fn spellcheck(toggle: Bool) -> Attribute(a) {
   case toggle {
     True -> attribute.attribute("spellcheck", "true")
@@ -64,31 +69,37 @@ fn spellcheck(toggle: Bool) -> Attribute(a) {
 }
 
 fn view(model: Model) {
-  html.main([], [
-    h1([], [text("Base64")]),
-    label([], [
-      h2([], [text("Encoded")]),
-      textarea(
-        [
-          event.on_input(NewEncodedInput),
-          spellcheck(False),
-          placeholder("aGVsbG8="),
-        ],
-        model.encoded,
-      ),
-      button([event.on_click(SaveEncodedInput)], [text("Copy")]),
+  div([class("max-w-screen-lg my-0 mx-auto h-screen")], [
+    header([class("flex flex-row justify-center")], [
+      h1([class("text-4xl py-3 font-extrabold")], [text("Base64")]),
     ]),
-    label([], [
-      h2([], [text("Decoded")]),
-      textarea(
-        [
-          event.on_input(NewDecodedInput),
-          spellcheck(False),
-          placeholder("plaintext"),
-        ],
-        model.decoded,
-      ),
-      button([event.on_click(SaveDecodedInput)], [text("Copy")]),
+    html.main([class("flex flex-col md:flex-row justify-center h-4/5")], [
+      label([class("flex grow flex-col items-center px-2")], [
+        h2([class("font-bold")], [text("Encoded")]),
+        textarea(
+          [
+            class("border w-full grow p-1 focus:placeholder-white resize-none"),
+            event.on_input(NewEncodedInput),
+            spellcheck(False),
+            placeholder("aGVsbG8="),
+          ],
+          model.encoded,
+        ),
+        button([event.on_click(SaveEncodedInput), tabindex(-1)], [text("Copy")]),
+      ]),
+      label([class("flex grow flex-col items-center px-2")], [
+        h2([class("font-bold")], [text("Decoded")]),
+        textarea(
+          [
+            class("border w-full grow p-1 focus:placeholder-white resize-none"),
+            event.on_input(NewDecodedInput),
+            spellcheck(False),
+            placeholder("plaintext"),
+          ],
+          model.decoded,
+        ),
+        button([event.on_click(SaveDecodedInput), tabindex(-1)], [text("Copy")]),
+      ]),
     ]),
   ])
 }
