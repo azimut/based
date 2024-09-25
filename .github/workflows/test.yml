@@ -44,7 +44,7 @@ jobs:
 
       - name: build site
         run: |
-          gleam run -m lustre/dev build --minify=true
+          make release
           mkdir public
           sed 's#/based#/based.min#g' index.html > public/index.html
           cp -r priv public/
