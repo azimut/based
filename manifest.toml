@@ -20,6 +20,7 @@ packages = [
   { name = "gleam_package_interface", version = "1.1.0", build_tools = ["gleam"], requirements = ["gleam_json", "gleam_stdlib"], otp_app = "gleam_package_interface", source = "hex", outer_checksum = "CF3BFC5D0997750D9550D8D73A90F4B8D71C6C081B20ED4E70FFBE1E99AFC3C2" },
   { name = "gleam_stdlib", version = "0.40.0", build_tools = ["gleam"], requirements = [], otp_app = "gleam_stdlib", source = "hex", outer_checksum = "86606B75A600BBD05E539EB59FABC6E307EEEA7B1E5865AFB6D980A93BCB2181" },
   { name = "glearray", version = "0.2.2", build_tools = ["gleam"], requirements = ["gleam_stdlib"], otp_app = "glearray", source = "hex", outer_checksum = "9C207E05F38D724F464FA921378DB3ABC2B0A2F5821116D8BC8B2CACC68930D5" },
+  { name = "gleeunit", version = "1.2.0", build_tools = ["gleam"], requirements = ["gleam_stdlib"], otp_app = "gleeunit", source = "hex", outer_checksum = "F7A7228925D3EE7D0813C922E062BFD6D7E9310F0BEE585D3A42F3307E3CFD13" },
   { name = "glint", version = "1.0.1", build_tools = ["gleam"], requirements = ["gleam_community_ansi", "gleam_community_colour", "gleam_stdlib", "snag"], otp_app = "glint", source = "hex", outer_checksum = "369C8A289017F73581D6B9FE2F5748169EB6FA021FFAA34FA7A49EE2094C73B3" },
   { name = "glisten", version = "5.0.0", build_tools = ["gleam"], requirements = ["gleam_erlang", "gleam_otp", "gleam_stdlib", "logging", "telemetry"], otp_app = "glisten", source = "hex", outer_checksum = "48EF7F6D1DCA877C2F49AF35CC33946C7129EEB05A114758A2CC569C708BFAF8" },
   { name = "gramps", version = "2.0.3", build_tools = ["gleam"], requirements = ["gleam_crypto", "gleam_erlang", "gleam_http", "gleam_stdlib"], otp_app = "gramps", source = "hex", outer_checksum = "3CCAA6E081225180D95C79679D383BBF51C8D1FDC1B84DA1DA444F628C373793" },
@@ -44,5 +45,6 @@ packages = [
 
 [requirements]
 gleam_stdlib = { version = ">= 0.34.0 and < 2.0.0" }
+gleeunit = { version = ">= 1.0.0 and < 2.0.0" }
 lustre = { version = ">= 4.4.4 and < 5.0.0" }
 lustre_dev_tools = { version = ">= 1.5.4 and < 2.0.0" }
